@@ -1,0 +1,754 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Countdown ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #ffeef7 0%, #ffe0ea 50%, #ffcdd2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #8e4162;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 30px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(255, 182, 193, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            max-width: 400px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 182, 193, 0.1) 0%, transparent 50%);
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(10px, -10px) rotate(5deg); }
+        }
+
+        .heart-display {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        h1 {
+            font-family: 'Caveat', cursive;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #d63384;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(214, 51, 132, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: #a75574;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .countdown {
+            background: linear-gradient(135deg, #ff6b9d, #ff8fb3);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3);
+        }
+
+        .countdown-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .countdown-label {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-top: 5px;
+            opacity: 0.9;
+        }
+
+        .daily-message {
+            background: rgba(255, 240, 245, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #ff6b9d;
+            position: relative;
+        }
+
+        .daily-message::before {
+            content: '💝';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 1.5rem;
+            background: white;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(255, 107, 157, 0.2);
+        }
+
+        .message-text {
+            font-family: 'Caveat', cursive;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #8e4162;
+            line-height: 1.4;
+        }
+
+        .refresh-btn {
+            background: linear-gradient(135deg, #ff8fb3, #ffb3c6);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 25px;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 143, 179, 0.3);
+        }
+
+        .refresh-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(255, 143, 179, 0.4);
+        }
+
+        .refresh-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Mini Quiz Styles */
+        .quiz-section {
+            background: linear-gradient(135deg, #ffe0f4, #fef0ff);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 2px solid #ff8fb3;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quiz-title {
+            font-family: 'Caveat', cursive;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #d63384;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .quiz-question {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #ff6b9d;
+        }
+
+        .question-text {
+            font-weight: 600;
+            color: #8e4162;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .quiz-option {
+            background: linear-gradient(135deg, #ffb3d9, #ffc9e3);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 20px;
+            color: #8e4162;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .quiz-option:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 157, 0.3);
+            background: linear-gradient(135deg, #ff8fb3, #ffb3c6);
+            color: white;
+        }
+
+        .quiz-option:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .quiz-feedback {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 15px;
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            animation: slideIn 0.5s ease;
+        }
+
+        .feedback-correct {
+            color: #28a745;
+            border-left: 4px solid #28a745;
+        }
+
+        .feedback-wrong {
+            color: #dc3545;
+            border-left: 4px solid #dc3545;
+        }
+
+        .quiz-controls {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .quiz-btn {
+            background: linear-gradient(135deg, #ff6b9d, #ff8fb3);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 25px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+
+        .quiz-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(255, 107, 157, 0.4);
+        }
+
+        /* Secret Notes Popup */
+        .secret-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .secret-note {
+            background: linear-gradient(135deg, #fff0f5, #ffe4e9);
+            border-radius: 25px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 25px 80px rgba(255, 107, 157, 0.4);
+            border: 3px solid #ff8fb3;
+            position: relative;
+            max-width: 400px;
+            width: 90%;
+            animation: popIn 0.6s ease;
+        }
+
+        .secret-note-text {
+            font-family: 'Caveat', cursive;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #d63384;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+
+        .close-secret {
+            background: linear-gradient(135deg, #ff8fb3, #ffb3c6);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 25px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        /* Floating Hearts Animation */
+        .floating-heart {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: floatUp 3s ease-out forwards;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(1.5);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .quiz-hidden {
+            display: none;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #a75574;
+            opacity: 0.7;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+                border-radius: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .countdown-number {
+                font-size: 3rem;
+            }
+            
+            .heart-display {
+                font-size: 3rem;
+            }
+            
+            .message-text {
+                font-size: 1.2rem;
+            }
+
+            .quiz-title {
+                font-size: 1.5rem;
+            }
+
+            .secret-note {
+                padding: 30px 20px;
+            }
+
+            .secret-note-text {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="heart-display" id="randomHeart"></div>
+        
+        <h1>Counting the days till I can be in your arms again ✨</h1>
+        
+        <div class="countdown">
+            <div class="countdown-number" id="daysLeft">0</div>
+            <div class="countdown-label">days to go!</div>
+        </div>
+        
+        <div class="daily-message">
+            <div class="message-text" id="dailyMessage"></div>
+        </div>
+
+        <!-- Mini Quiz Game -->
+        <div class="quiz-section">
+            <div class="quiz-title">💕 Love Quiz 💕</div>
+            <div id="quizContainer">
+                <div class="quiz-question">
+                    <div class="question-text" id="questionText">Ready to test how well you know us? 😘</div>
+                    <div class="quiz-options" id="quizOptions">
+                        <!-- Options will be inserted here -->
+                    </div>
+                    <div id="quizFeedback"></div>
+                </div>
+                <div class="quiz-controls">
+                    <button class="quiz-btn" id="startQuizBtn" onclick="startQuiz()">Start Quiz 🎯</button>
+                    <button class="quiz-btn quiz-hidden" id="nextBtn" onclick="nextQuestion()">Next Question ➡️</button>
+                    <button class="quiz-btn quiz-hidden" id="replayBtn" onclick="replayQuiz()">Play Again 🔄</button>
+                </div>
+            </div>
+        </div>
+        
+        <button class="refresh-btn" onclick="refreshHeart()">Tap me 💕</button>
+        
+        <div class="footer">
+            Come back tomorrow, I'll be waiting for you 😊<br>
+            Made with love 💖
+        </div>
+    </div>
+
+    <script>
+        // ========== EASY CONFIGURATION ==========
+        // Change this date to your target date (YYYY-MM-DD format)
+        const TARGET_DATE = '2025-10-23'; // Example: New Year's Eve
+        
+        // Add your daily messages here - one for each day
+        const DAILY_MESSAGES = [
+            "Today is a beautiful day to smile! 😊",
+            "Remember, you are loved more than you know! 💖",
+            "Every moment with you is a treasure! ✨",
+            "You make my world brighter every day! 🌟",
+            "Thinking of you brings joy to my heart! 💕",
+            "Can't wait to create more memories together! 🥰",
+            "You are my favorite hello and hardest goodbye! 💘",
+            "Distance means nothing when love means everything! 💞",
+            "Counting down to our special moment! ⏰",
+            "You are worth every second of waiting! 💓",
+            "Together we can conquer anything! 💪",
+            "Love grows stronger with each passing day! 🌱",
+            "You are my sunshine on cloudy days! ☀️",
+            "Forever grateful for your love! 🙏",
+            "Adventure awaits us both! 🗺️"
+        ];
+        
+        const HEART_EMOJIS = ['❤️', '💖', '💕', '💞', '💓', '💘'];
+
+        // ========== QUIZ CONFIGURATION ==========
+        const QUIZ_QUESTIONS = [
+            {
+                question: "What's my favorite snack? 🍿",
+                options: ["Chocolate 🍫", "Popcorn 🍿", "Ice cream 🍦", "Cookies 🍪"],
+                correct: 2,
+                correctFeedback: "Yes! You know me so well! 🎉✨",
+                wrongFeedback: "Oops! But you're still perfect to me! 😝💕"
+            },
+            {
+                question: "Where was our first date? 💕",
+                options: ["Coffee shop ☕", "Rooftop 🖖", "Restaurant 🍽️", "Cinema 🎬"],
+                correct: 1,
+                correctFeedback: "Aww, you remember! That was magical! ✅💖",
+                wrongFeedback: "Close, but not quite! Still love you though! 😒❤️"
+            },
+            {
+                question: "What's my favorite color? 🎨",
+                options: ["Blue 💙", "Red ❤️", "Purple 💜", "Grey 🩶"],
+                correct: 2,
+                correctFeedback: "Perfect! So soft like my love for you! 🎉💕",
+                wrongFeedback: "Nope! But you're still my favorite person! 😝🌈"
+            },
+            {
+                question: "What do I love most about you? 💘",
+                options: ["Your smile 😊", "Your laugh 😂", "Your hugs 🤗", "Everything! 🥰"],
+                correct: 3,
+                correctFeedback: "YES! Everything about you is perfect! ✅🎊",
+                wrongFeedback: "All are true, but EVERYTHING wins! 😝💖"
+            },
+            {
+                question: "What's our song? 🎵",
+                options: ["My all 💕", "Bambi 🌟", "Ride for me ❤️", "Back at one 🥰"],
+                correct: 3,
+                correctFeedback: "Our song! Makes my heart flutter! 🎉🎵",
+                wrongFeedback: "Not quite, but all songs remind me of you! 😒🎶"
+            }
+        ];
+
+        // ========== SECRET NOTES CONFIGURATION ==========
+        const SECRET_NOTES = {
+            '2025-10-01': {
+                message: "🎉 Officially 2 months 💕✨<br>Every day with you feels like a dream come true!",
+                hearts: ['💕', '✨', '🎉', '💖']
+            },
+            '2025-10-23': {
+                message: "🎂 HAPPY BIRTHDAY MI AMOR 🎉💖<br>You're my everything 😘<br>Hope your day is as amazing as you are!",
+                hearts: ['🎂', '🎉', '💖', '🎈', '✨', '😘']
+            }
+        };
+
+        // ========== GLOBAL VARIABLES ==========
+        let currentQuizIndex = 0;
+        let quizQuestions = [];
+        let quizActive = false;
+        
+        // ========== QUIZ FUNCTIONS ==========
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        function startQuiz() {
+            quizQuestions = shuffleArray(QUIZ_QUESTIONS);
+            currentQuizIndex = 0;
+            quizActive = true;
+            
+            document.getElementById('startQuizBtn').classList.add('quiz-hidden');
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const question = quizQuestions[currentQuizIndex];
+            document.getElementById('questionText').textContent = question.question;
+            
+            const optionsContainer = document.getElementById('quizOptions');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.className = 'quiz-option';
+                button.textContent = option;
+                button.onclick = () => selectAnswer(index);
+                optionsContainer.appendChild(button);
+            });
+            
+            document.getElementById('quizFeedback').innerHTML = '';
+            document.getElementById('nextBtn').classList.add('quiz-hidden');
+            document.getElementById('replayBtn').classList.add('quiz-hidden');
+        }
+
+        function selectAnswer(selectedIndex) {
+            const question = quizQuestions[currentQuizIndex];
+            const options = document.querySelectorAll('.quiz-option');
+            const feedbackDiv = document.getElementById('quizFeedback');
+            
+            // Disable all options
+            options.forEach(option => option.disabled = true);
+            
+            // Show feedback
+            if (selectedIndex === question.correct) {
+                feedbackDiv.innerHTML = `<div class="quiz-feedback feedback-correct">${question.correctFeedback}</div>`;
+                createFloatingHearts('💕');
+            } else {
+                feedbackDiv.innerHTML = `<div class="quiz-feedback feedback-wrong">${question.wrongFeedback}</div>`;
+            }
+            
+            // Show next button or finish
+            setTimeout(() => {
+                if (currentQuizIndex < quizQuestions.length - 1) {
+                    document.getElementById('nextBtn').classList.remove('quiz-hidden');
+                } else {
+                    document.getElementById('replayBtn').classList.remove('quiz-hidden');
+                    feedbackDiv.innerHTML += `<div class="quiz-feedback feedback-correct">🎊 Quiz complete! You're amazing! 🎊</div>`;
+                }
+            }, 1500);
+        }
+
+        function nextQuestion() {
+            currentQuizIndex++;
+            showQuestion();
+        }
+
+        function replayQuiz() {
+            document.getElementById('questionText').textContent = "Ready to test how well you know us? 😘";
+            document.getElementById('quizOptions').innerHTML = '';
+            document.getElementById('quizFeedback').innerHTML = '';
+            document.getElementById('nextBtn').classList.add('quiz-hidden');
+            document.getElementById('replayBtn').classList.add('quiz-hidden');
+            document.getElementById('startQuizBtn').classList.remove('quiz-hidden');
+            quizActive = false;
+        }
+
+        // ========== SECRET NOTES FUNCTIONS ==========
+        function checkForSecretNote() {
+            const today = new Date();
+            const dateString = today.getFullYear() + '-' + 
+                              String(today.getMonth() + 1).padStart(2, '0') + '-' + 
+                              String(today.getDate()).padStart(2, '0');
+            
+            if (SECRET_NOTES[dateString]) {
+                showSecretNote(SECRET_NOTES[dateString]);
+            }
+        }
+
+        function showSecretNote(noteData) {
+            const popup = document.createElement('div');
+            popup.className = 'secret-popup';
+            
+            popup.innerHTML = `
+                <div class="secret-note">
+                    <div class="secret-note-text">${noteData.message}</div>
+                    <button class="close-secret" onclick="closeSecretNote()">Close 💕</button>
+                </div>
+            `;
+            
+            document.body.appendChild(popup);
+            
+            // Create floating hearts animation
+            setTimeout(() => createFloatingHearts(noteData.hearts.join('')), 500);
+            
+            // Auto-close after 10 seconds
+            setTimeout(() => {
+                if (document.querySelector('.secret-popup')) {
+                    closeSecretNote();
+                }
+            }, 10000);
+        }
+
+        function closeSecretNote() {
+            const popup = document.querySelector('.secret-popup');
+            if (popup) {
+                popup.remove();
+            }
+        }
+
+        // ========== ANIMATION FUNCTIONS ==========
+        function createFloatingHearts(heartString = '💕✨💖') {
+            const hearts = Array.from(heartString);
+            const container = document.querySelector('.container');
+            
+            for (let i = 0; i < 6; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'floating-heart';
+                    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                    
+                    // Random position
+                    heart.style.left = Math.random() * 80 + 10 + '%';
+                    heart.style.top = Math.random() * 20 + 70 + '%';
+                    
+                    container.appendChild(heart);
+                    
+                    // Remove after animation
+                    setTimeout(() => heart.remove(), 3000);
+                }, i * 200);
+            }
+        }
+
+        // ========== EXISTING FUNCTIONS ==========
+        
+        function calculateDaysLeft() {
+            const now = new Date();
+            const target = new Date(TARGET_DATE);
+            const timeDiff = target - now;
+            const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+            
+            document.getElementById('daysLeft').textContent = daysLeft > 0 ? daysLeft : '0';
+            
+            if (daysLeft <= 0) {
+                document.querySelector('.countdown-label').textContent = "The day is here! 🎉";
+            }
+        }
+        
+        function getDailyMessage() {
+            const today = new Date();
+            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+            const messageIndex = (dayOfYear - 1) % DAILY_MESSAGES.length;
+            
+            document.getElementById('dailyMessage').textContent = DAILY_MESSAGES[messageIndex];
+        }
+        
+        function getRandomHeart() {
+            const randomIndex = Math.floor(Math.random() * HEART_EMOJIS.length);
+            return HEART_EMOJIS[randomIndex];
+        }
+        
+        function refreshHeart() {
+            const heartElement = document.getElementById('randomHeart');
+            heartElement.textContent = getRandomHeart();
+            
+            // Add a little animation when refreshing
+            heartElement.style.animation = 'none';
+            setTimeout(() => {
+                heartElement.style.animation = 'heartbeat 1.5s ease-in-out infinite';
+            }, 10);
+        }
+        
+        function init() {
+            calculateDaysLeft();
+            getDailyMessage();
+            refreshHeart();
+            checkForSecretNote(); // Check for secret notes on page load
+            
+            // Add subtle floating hearts on page load
+            setTimeout(() => createFloatingHearts(), 1000);
+        }
+        
+        // ========== INITIALIZE ==========
+        init();
+        
+        // Update countdown every hour (3600000 milliseconds)
+        setInterval(calculateDaysLeft, 3600000);
+        
+        // Change daily message at midnight
+        setInterval(() => {
+            const now = new Date();
+            if (now.getHours() === 0 && now.getMinutes() === 0) {
+                getDailyMessage();
+            }
+        }, 60000); // Check every minute
+    </script>
+</body>
+</html>
